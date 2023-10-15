@@ -1,0 +1,57 @@
+
+/* Admin Interface Styles */
+
+.wrap {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.playlist-admin-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #23282d;
+}
+
+.playlist-form {
+    margin-top: 20px;
+}
+
+.playlist-form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.playlist-form input[type="text"],
+.playlist-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.playlist-form button {
+    margin-top: 20px;
+    background-color: #007cba;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.playlist-form button:hover {
+    background-color: #005a87;
+}
+
+.playlist-list {
+    margin-top: 30px;
+}
+
+.playlist-list-item {
+    padding: 10px;
+    border: 1px solid #e2e2e2;
+    margin-top: 10px;
+}
+
+/* If you have frontend styles, add them below */
+

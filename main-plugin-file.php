@@ -37,7 +37,11 @@ foreach ($required_resources as $resource) {
 // Include necessary files
 require_once(plugin_dir_path(__FILE__) . 'init.php');
 require_once(plugin_dir_path(__FILE__) . 'admin-interface.php');
-require_once(plugin_dir_path(__FILE__) . 'api-endpoints-full.php');
+require_once(plugin_dir_path(__FILE__) . 'APIEndpointsRegistrar.php');
+require_once(plugin_dir_path(__FILE__) . 'PlaylistCreator.php');
+require_once(plugin_dir_path(__FILE__) . 'PlaylistDeleter.php');
+require_once(plugin_dir_path(__FILE__) . 'PlaylistFetcher.php');
+require_once(plugin_dir_path(__FILE__) . 'PlaylistUpdater.php');
 require_once(plugin_dir_path(__FILE__) . 'ajax-handlers.php');
 require_once(plugin_dir_path(__FILE__) . 'tests/bootstrap.php');
 require_once(plugin_dir_path(__FILE__) . 'shortcode.php');

@@ -23,8 +23,14 @@ function fetch_more_media_items() {
     // Fetch the attachments
     $attachments = get_posts($args);
 
+    // Check if there are any errors or if no attachments are found
+    if (is_wp_error($attachments) || empty($attachments)) {
+        wp_send_json_error('Failed to fetch media items. Please try again later.');
+        exit;
+    }
+
     // Return the data as JSON
-    wp_send_json($attachments);
+    wp_send_json_success($attachments);
 }
 
 // Register the AJAX action

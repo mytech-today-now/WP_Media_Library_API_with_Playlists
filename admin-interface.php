@@ -28,6 +28,12 @@ function render_playlist_admin_page() {
     // Nonce for security
     $nonce = wp_create_nonce('playlist_nonce');
 
+    // Sanitize and validate POST data
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $playlist_name = isset($_POST['playlist_name']) ? sanitize_text_field($_POST['playlist_name']) : '';
+        // Further validation can be added here
+    }
+
     // Here, you can integrate the interface for adding, editing, and deleting playlists
     // This can be a combination of HTML, PHP and using WordPress functions
     ?>

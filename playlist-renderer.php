@@ -1,4 +1,3 @@
-
 <?php
 function render_playlist($request) {
     // Get the post based on the ID

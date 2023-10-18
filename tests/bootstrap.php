@@ -1,5 +1,10 @@
 <?php
 
+// Check for required dependencies
+if (!file_exists('tests/bootstrap.php')) {
+    die('Dependencies missing. Please ensure all required files are present before running tests.');
+}
+
 // Include the test bootstrap file
 require_once 'tests/bootstrap.php';
 

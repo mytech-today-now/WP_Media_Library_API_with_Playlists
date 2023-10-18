@@ -1,4 +1,3 @@
-
 <?php
 
 function render_playlist_shortcode($atts) {
@@ -7,7 +6,8 @@ function render_playlist_shortcode($atts) {
         'id' => '0',
     ), $atts);
 
-    $post_id = intval($attributes['id']);
+    // Sanitize the attributes
+    $post_id = intval(sanitize_text_field($attributes['id']));
     if (!is_valid_playlist($post_id)) {
         return "<p>Invalid playlist ID.</p>";
     }

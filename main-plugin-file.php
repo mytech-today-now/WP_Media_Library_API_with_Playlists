@@ -1,16 +1,17 @@
-
 <?php
 /**
  * Plugin Name: Custom Playlist Creator
  * Plugin URI: https://mytech.today
  * Description: A plugin to create custom JSON playlists using WordPress media library items.
- * Version: 1.0
  * Author: mytech.today
  * Author URI: https://mytech.today
  * Text Domain: custom-playlist-creator
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
+
+// Define plugin version as a constant
+define('CUSTOM_PLAYLIST_CREATOR_VERSION', '1.0');
 
 // Prevent direct file access
 if (!defined('ABSPATH')) {

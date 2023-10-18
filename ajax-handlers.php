@@ -4,7 +4,10 @@
 // AJAX handler to fetch more media items
 function fetch_more_media_items() {
     // Verify nonce for security
-    check_ajax_referer('fetch_more_media_nonce', 'nonce');
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'fetch_more_media_nonce')) {
+        wp_send_json_error('Nonce verification failed.');
+        exit;
+    }
 
     // Get the offset from the AJAX request (how many items to skip)
     $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;

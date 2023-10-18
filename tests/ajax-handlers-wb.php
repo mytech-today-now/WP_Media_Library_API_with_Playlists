@@ -1,6 +1,6 @@
 <?php
 
-require_once 'ajax-handlers.php';
+require_once dirname( __FILE__ ) . '/../ajax-handlers.php';
 
 // Test fetch_more_media_items function with valid AJAX request
 $_POST['nonce'] = wp_create_nonce('fetch_more_media_nonce');

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'playlist-renderer.php';
+require_once dirname( __FILE__ ) . '/../playlist-renderer.php';
 
 // Test render_playlist function with valid playlist data
 $post_id_valid = 1; // Assuming post ID 1 is a valid playlist

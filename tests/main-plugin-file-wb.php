@@ -1,6 +1,6 @@
 <?php
 
-require_once 'main-plugin-file.php';
+require_once dirname( __FILE__ ) . '/../main-plugin-file.php';
 
 // Test the initialization of the plugin
 // Note: This requires checking if all necessary resources and functionalities are loaded properly.

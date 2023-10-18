@@ -1,6 +1,6 @@
 <?php
 
-require_once 'admin-interface.php';
+require_once dirname( __FILE__ ) . '/../admin-interface.php';
 
 // Test the UI elements for proper rendering
 ob_start();

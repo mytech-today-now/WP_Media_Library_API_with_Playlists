@@ -1,37 +1,41 @@
 <?php
 
-// Check for required dependencies
-if (!file_exists('tests/bootstrap.php')) {
-    die('Dependencies missing. Please ensure all required files are present before running tests.');
-}
-
-// Include the test bootstrap file
-require_once 'tests/bootstrap.php';
+// Include the necessary files for testing
+require_once dirname( __FILE__ ) . '/../utils.php';
 
 /**
  * Class TestUtilsFunctions
- * Tests for utility functions in utils.php
+ * 
+ * This class contains tests for utility functions defined in utils.php.
+ * Each test method is designed to test a specific functionality of the utility functions.
+ * 
+ * @package WP_Media_Library_API_with_Playlists
+ * @subpackage Tests
  */
 class TestUtilsFunctions extends WP_UnitTestCase {
 
     /**
-     * Test sanitize_string_input function
+     * Test the sanitize_string_input function.
+     * 
+     * This test checks the sanitize_string_input function to ensure that it correctly sanitizes
+     * input strings by removing any malicious code or scripts.
+     * 
+     * @return void
      */
     public function test_sanitize_string_input() {
-        // Positive test
+        // Positive test: Check if malicious scripts are removed
         $this->assertEquals('Hello World', sanitize_string_input('<script>alert(1)</script>Hello World'));
 
-        // Boundary test
+        // Boundary test: Check behavior with empty string
         $this->assertEquals('', sanitize_string_input(''));
 
-        // Negative test
+        // Negative test: Ensure the function doesn't return the malicious script
         $this->assertNotEquals('<script>alert(1)</script>', sanitize_string_input('<script>alert(1)</script>'));
     }
 
-    // Add more tests for other utility functions...
+    // Placeholder for additional tests for other utility functions...
 
 }
 
-// Add more test classes for other PHP files or classes in the plugin...
+// Placeholder for additional test classes for other PHP files or classes in the plugin...
 
-?>

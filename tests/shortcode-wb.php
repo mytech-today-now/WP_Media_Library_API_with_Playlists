@@ -1,6 +1,6 @@
 <?php
 
-require_once 'shortcode.php';
+require_once dirname( __FILE__ ) . '/../shortcode.php';
 
 // Test render_playlist_shortcode function with valid shortcodes
 $shortcode_valid = '[playlist_embed id="1"]'; // Assuming post ID 1 is a valid playlist

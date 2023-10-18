@@ -1,6 +1,11 @@
 <?php
 
-require_once 'api-endpoints-full.php';
+require_once dirname( __FILE__ ) . '/../APIEndpointsRegistrar.php';
+require_once dirname( __FILE__ ) . '/../PlaylistCreator.php';
+require_once dirname( __FILE__ ) . '/../PlaylistUpdater.php';
+require_once dirname( __FILE__ ) . '/../PlaylistDeleter.php';
+require_once dirname( __FILE__ ) . '/../PlaylistFetcher.php';
+
 
 // Test fetch_playlists endpoint with valid request data
 $response_fetch = fetch_playlists();

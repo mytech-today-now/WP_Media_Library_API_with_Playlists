@@ -5,7 +5,7 @@ function playlist_plugin_install() {
 
     // Check for minimum WordPress version
     global $wp_version;
-    $minimum_wp_version = '5.0';
+    $minimum_wp_version = '5.8';  // Updated to the latest version as of my last training data
     if (version_compare($wp_version, $minimum_wp_version, '<')) {
         deactivate_plugins(basename(__FILE__)); // Deactivate the plugin
         wp_die("This plugin requires WordPress version $minimum_wp_version or higher.");

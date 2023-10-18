@@ -1,0 +1,63 @@
+$primary-color: #007cba
+$hover-color: #005a87
+$border-color: #e2e2e2
+$font-family: Arial, sans-serif
+
+.wrap
+  font-family: $font-family
+  margin: 20px
+  max-width: 100%
+  box-sizing: border-box
+
+.playlist-admin-header
+  font-size: 24px
+  margin-bottom: 20px
+  color: #23282d
+
+.playlist-form
+  margin-top: 20px
+
+  label
+    display: block
+    margin-top: 10px
+    font-weight: bold
+
+  input[type="text"], textarea
+    width: 100%
+    padding: 10px
+    margin-top: 5px
+    box-sizing: border-box
+
+  button
+    margin-top: 20px
+    background-color: $primary-color
+    color: #ffffff
+    border: none
+    padding: 10px 15px
+    cursor: pointer
+    border-radius: 4px
+    transition: background-color 0.3s ease
+
+    &:hover
+      background-color: $hover-color
+
+.playlist-list
+  margin-top: 30px
+
+.playlist-list-item
+  padding: 10px
+  border: 1px solid $border-color
+  margin-top: 10px
+  box-sizing: border-box
+
+@media (max-width: 768px)
+  .wrap
+    padding: 0 10px
+
+  .playlist-form
+    input[type="text"], textarea
+      font-size: 14px
+
+    button
+      padding: 8px 12px
+      font-size: 14px

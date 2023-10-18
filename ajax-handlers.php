@@ -8,8 +8,14 @@ function fetch_more_media_items() {
         exit;
     }
 
-    // Get the offset from the AJAX request (how many items to skip)
-    $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
+    // Sanitize and validate the offset from the AJAX request (how many items to skip)
+    $offset = isset($_POST['offset']) ? intval(sanitize_text_field($_POST['offset'])) : 0;
+
+    // Ensure the offset is a positive integer
+    if ($offset < 0) {
+        wp_send_json_error('Invalid offset value.');
+        exit;
+    }
 
     // Define the query arguments
     $args = array(

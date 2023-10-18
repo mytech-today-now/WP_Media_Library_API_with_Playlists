@@ -25,7 +25,12 @@ function render_playlist($request) {
         $response[$key] = $value;
     }
 
-    return new WP_REST_Response($response, 200);
+    // Load the template and pass the data
+    ob_start();
+    include(plugin_dir_path(__FILE__) . 'playlist-template.php');
+    $output = ob_get_clean();
+
+    return new WP_REST_Response($output, 200);
 }
 
 // Register the API endpoint

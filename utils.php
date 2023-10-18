@@ -11,53 +11,29 @@ function sanitize_string_input($input) {
 }
 
 /**
- * Validate URL
+ * Validate and sanitize URL
  *
- * @param string $url The URL to validate.
- * @return bool True if valid, false otherwise.
+ * @param string $url The URL to validate and sanitize.
+ * @return string|false Sanitized URL or false if invalid.
  */
-function validate_url($url) {
-    return filter_var($url, FILTER_VALIDATE_URL) !== false;
-}
-
-/**
- * Sanitize URL
- *
- * @param string $url The URL to sanitize.
- * @return string Sanitized URL.
- */
-function sanitize_url_input($url) {
+function process_url($url) {
+    if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+        return false;
+    }
     return esc_url_raw($url);
 }
 
 /**
- * Validate integer values
+ * Validate and sanitize integer values
  *
- * @param int $int The integer to validate.
- * @return bool True if valid, false otherwise.
+ * @param mixed $int The value to validate and sanitize.
+ * @return int|false Sanitized integer or false if invalid.
  */
-function validate_integer($int) {
-    return filter_var($int, FILTER_VALIDATE_INT) !== false;
-}
-
-/**
- * Sanitize integer values
- *
- * @param int $int The integer to sanitize.
- * @return int Sanitized integer.
- */
-function sanitize_integer_input($int) {
+function process_integer($int) {
+    if (filter_var($int, FILTER_VALIDATE_INT) === false) {
+        return false;
+    }
     return intval($int);
-}
-
-/**
- * Validate boolean values
- *
- * @param bool $value The boolean value to validate.
- * @return bool True if valid, false otherwise.
- */
-function validate_bool($value) {
-    return is_bool($value);
 }
 
 /**
@@ -82,27 +58,20 @@ function is_valid_playlist($post_id) {
 }
 
 /**
- * New function to sanitize email
+ * Validate and sanitize email
  *
- * @param string $email The email to sanitize.
- * @return string Sanitized email.
+ * @param string $email The email to validate and sanitize.
+ * @return string|false Sanitized email or false if invalid.
  */
-function sanitize_email_input($email) {
+function process_email($email) {
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+        return false;
+    }
     return sanitize_email($email);
 }
 
 /**
- * New function to validate email
- *
- * @param string $email The email to validate.
- * @return bool True if valid, false otherwise.
- */
-function validate_email($email) {
-    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
-}
-
-/**
- * New function to sanitize textarea input
+ * Sanitize textarea input
  *
  * @param string $input The textarea input to sanitize.
  * @return string Sanitized textarea input.

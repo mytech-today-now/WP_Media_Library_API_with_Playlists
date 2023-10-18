@@ -42,4 +42,19 @@ function is_valid_playlist($post_id) {
     return ($post && $post->post_type === 'playlist');
 }
 
+// New function to sanitize email
+function sanitize_email_input($email) {
+    return sanitize_email($email);
+}
+
+// New function to validate email
+function validate_email($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+}
+
+// New function to sanitize textarea input
+function sanitize_textarea_input($input) {
+    return sanitize_textarea_field($input);
+}
+
 ?>

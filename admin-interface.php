@@ -24,6 +24,10 @@ add_action('admin_menu', 'add_playlist_menu_page');
 
 // Render the playlist management page
 function render_playlist_admin_page() {
+    
+    // Nonce for security
+    $nonce = wp_create_nonce('playlist_nonce');
+
     // Here, you can integrate the interface for adding, editing, and deleting playlists
     // This can be a combination of HTML, PHP and using WordPress functions
     ?>
@@ -33,6 +37,7 @@ function render_playlist_admin_page() {
         <!-- Form for adding a new playlist -->
         <h2><?php _e('Add New Playlist', 'your-plugin-textdomain'); ?></h2>
         <form method="post" action="">
+            <input type="hidden" name="_wpnonce" value="<?php echo $nonce; ?>">
             <label for="playlist_name"><?php _e('Playlist Name:', 'your-plugin-textdomain'); ?></label>
             <input type="text" id="playlist_name" name="playlist_name" required>
             <input type="submit" value="<?php _e('Add Playlist', 'your-plugin-textdomain'); ?>">
@@ -41,6 +46,7 @@ function render_playlist_admin_page() {
         <!-- Form for editing an existing playlist -->
         <h2><?php _e('Edit Playlist', 'your-plugin-textdomain'); ?></h2>
         <form method="post" action="">
+            <input type="hidden" name="_wpnonce" value="<?php echo $nonce; ?>">
             <label for="existing_playlist"><?php _e('Select Playlist:', 'your-plugin-textdomain'); ?></label>
             <select id="existing_playlist" name="existing_playlist">
                 <!-- You can populate this dropdown with existing playlists from the database -->

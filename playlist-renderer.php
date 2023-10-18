@@ -10,46 +10,34 @@ function render_playlist($request) {
         return new WP_REST_Response("No playlist found with ID {$post_id}.", 404);
     }
 
-    // Extract metadata
-    $timing = get_post_meta($post_id, 'timing', true);
-    $source_url = get_post_meta($post_id, 'source_url', true);
-    $length = get_post_meta($post_id, 'length', true);
-    $play_direction = get_post_meta($post_id, 'play_direction', true);
-    $credits = get_post_meta($post_id, 'credits', true);
-    $description = get_post_meta($post_id, 'description', true);
-    $thumbnail_image = get_post_meta($post_id, 'thumbnail_image', true);
-    $created = get_post_meta($post_id, 'created', true);
-    $live = get_post_meta($post_id, 'live', true);
-    $rating = get_post_meta($post_id, 'rating', true);
-    $number_views = get_post_meta($post_id, 'number_views', true);
-    $screen_ratio = get_post_meta($post_id, 'screen_ratio', true);
-    $tags = get_post_meta($post_id, 'tags', true);
-    $keywords = get_post_meta($post_id, 'keywords', true);
-
-    // Construct the response
-    $response = array(
-        'playlist' => array(
-            array(
-                'timing' => $timing
-            )
-        ),
-        'source_url' => $source_url,
-        'length' => $length,
-        'play_direction' => $play_direction,
-        'credits' => $credits,
-        'description' => $description,
-        'thumbnail_image' => $thumbnail_image,
-        'created' => $created,
-        'live' => $live,
-        'rating' => $rating,
-        'number_views' => $number_views,
-        'screen_ratio' => $screen_ratio,
-        'tags' => $tags,
-        'keywords' => $keywords
-    );
+    // Extract metadata and check for missing or corrupted data
+    $metadata_keys = [  'timing', 
+                        'source_url', 
+                        'length', 
+                        'play_direction', 
+                        'credits', 
+                        'description', 
+                        'thumbnail_image', 
+                        'created', 
+                        'live', 
+                        'rating', 
+                        'number_views', 
+                        'screen_ratio', 
+                        'tags', 
+                        'keywords'
+                    ];
+    $response = [];
+    foreach ($metadata_keys as $key) {
+        $value = get_post_meta($post_id, $key, true);
+        if (empty($value)) {
+            return new WP_REST_Response("Missing or corrupted data for key: {$key}.", 400);
+        }
+        $response[$key] = $value;
+    }
 
     return new WP_REST_Response($response, 200);
 }
+
 
 // Register the API endpoint
 function register_playlist_renderer() {

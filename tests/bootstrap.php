@@ -3,6 +3,8 @@
 // Include the necessary files for testing
 require_once dirname( __FILE__ ) . '/../utils.php';
 
+// TODO: Include the necessary WordPress testing environment setup here.
+
 /**
  * Class TestUtilsFunctions
  * 
@@ -12,7 +14,7 @@ require_once dirname( __FILE__ ) . '/../utils.php';
  * @package WP_Media_Library_API_with_Playlists
  * @subpackage Tests
  */
-class TestUtilsFunctions extends WP_UnitTestCase {
+class TestUtilsFunctions {
 
     /**
      * Test the sanitize_string_input function.
@@ -24,13 +26,13 @@ class TestUtilsFunctions extends WP_UnitTestCase {
      */
     public function test_sanitize_string_input() {
         // Positive test: Check if malicious scripts are removed
-        $this->assertEquals('Hello World', sanitize_string_input('<script>alert(1)</script>Hello World'));
+        assert('Hello World' === sanitize_string_input('<script>alert(1)</script>Hello World'));
 
         // Boundary test: Check behavior with empty string
-        $this->assertEquals('', sanitize_string_input(''));
+        assert('' === sanitize_string_input(''));
 
         // Negative test: Ensure the function doesn't return the malicious script
-        $this->assertNotEquals('<script>alert(1)</script>', sanitize_string_input('<script>alert(1)</script>'));
+        assert('<script>alert(1)</script>' !== sanitize_string_input('<script>alert(1)</script>'));
     }
 
     // Placeholder for additional tests for other utility functions...
@@ -38,4 +40,3 @@ class TestUtilsFunctions extends WP_UnitTestCase {
 }
 
 // Placeholder for additional test classes for other PHP files or classes in the plugin...
-

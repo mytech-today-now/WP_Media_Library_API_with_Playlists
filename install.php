@@ -18,7 +18,18 @@ function playlist_plugin_install() {
     add_option('playlist_plugin_option_name', 'default_value');
 
     // Initialize database tables or other settings
-    // Placeholder for database initialization
+    global $wpdb;
+
+    // Check if the table already exists before attempting to create it
+    $table_name = $wpdb->prefix . 'playlist_table_name'; // Replace 'playlist_table_name' with your table name
+    if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+        // Placeholder for database initialization for the first table
+    }
+
+    $another_table_name = $wpdb->prefix . 'another_playlist_table_name'; // Replace 'another_playlist_table_name' with your second table name
+    if($wpdb->get_var("SHOW TABLES LIKE '$another_table_name'") != $another_table_name) {
+        // Placeholder for database initialization for the second table
+    }
 
     // Other installation tasks can go here...
 }

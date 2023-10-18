@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Custom Playlist Creator
+ * Plugin Name: WP Media Library API with Playlists
  * Plugin URI: https://mytech.today
  * Description: A plugin to create custom JSON playlists using WordPress media library items.
  * Author: mytech.today
@@ -16,6 +16,22 @@ define('CUSTOM_PLAYLIST_CREATOR_VERSION', '1.0');
 // Prevent direct file access
 if (!defined('ABSPATH')) {
     exit;
+}
+
+// Check for WordPress version compatibility
+global $wp_version;
+if (version_compare($wp_version, '5.0', '<')) {
+    deactivate_plugins(basename(__FILE__)); // Deactivate the plugin
+    wp_die("This plugin requires WordPress version 5.0 or higher.");
+}
+
+// Check for required resources
+$required_resources = ['js/script.js', 'css/style.css']; // Placeholder for required resources
+foreach ($required_resources as $resource) {
+    if (!file_exists(plugin_dir_path(__FILE__) . $resource)) {
+        deactivate_plugins(basename(__FILE__)); // Deactivate the plugin
+        wp_die("Missing required resource: {$resource}.");
+    }
 }
 
 // Include necessary files

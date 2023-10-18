@@ -18,6 +18,21 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// Plugin Activation
+function custom_playlist_activation() {
+    // Code to run on plugin activation
+    // For example, you can set default options, create database tables, etc.
+}
+
+// Plugin Deactivation
+function custom_playlist_deactivation() {
+    // Code to run on plugin deactivation
+    // For example, you can clean up temporary data, remove cron jobs, etc.
+}
+
+register_activation_hook(__FILE__, 'custom_playlist_activation');
+register_deactivation_hook(__FILE__, 'custom_playlist_deactivation');
+
 // Check for WordPress version compatibility
 global $wp_version;
 if (version_compare($wp_version, '5.0', '<')) {
@@ -50,4 +65,5 @@ require_once(plugin_dir_path(__FILE__) . 'install.php');
 require_once(plugin_dir_path(__FILE__) . 'playlist-renderer.php');
 require_once(plugin_dir_path(__FILE__) . 'uninstall.php');
 // Other main plugin code can go here...
+
 ?>

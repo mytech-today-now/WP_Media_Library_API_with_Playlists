@@ -43,12 +43,6 @@ function get_playlist_data($post_id) {
     return $post;
 }
 
-// Check if a given post ID is a valid playlist
-function is_valid_playlist($post_id) {
-    $post = get_post($post_id);
-    return $post && $post->post_type === 'playlist';
-}
-
 // Register the shortcode
 add_shortcode('playlist_embed', 'render_playlist_shortcode');
 

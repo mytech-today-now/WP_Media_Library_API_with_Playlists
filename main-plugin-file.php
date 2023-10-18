@@ -22,6 +22,7 @@ require_once(plugin_dir_path(__FILE__) . 'init.php');
 require_once(plugin_dir_path(__FILE__) . 'admin-interface.php');
 require_once(plugin_dir_path(__FILE__) . 'api-endpoints-full.php');
 require_once(plugin_dir_path(__FILE__) . 'ajax-handlers.php');
+require_once(plugin_dir_path(__FILE__) . 'tests/bootstrap.php');
 require_once(plugin_dir_path(__FILE__) . 'shortcode.php');
 require_once(plugin_dir_path(__FILE__) . 'utils.php');
 require_once(plugin_dir_path(__FILE__) . 'install.php');

@@ -1,4 +1,3 @@
-
 <?php
 
 // AJAX handler to fetch more media items

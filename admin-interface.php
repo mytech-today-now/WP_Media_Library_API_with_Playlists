@@ -1,5 +1,5 @@
-
 <?php
+
 // Enqueue scripts and styles for the admin interface
 function enqueue_playlist_admin_scripts() {
     wp_enqueue_style('playlist-admin-css', plugins_url('css/admin-style.css', __FILE__));
@@ -31,6 +31,10 @@ function render_playlist_admin_page() {
     // Sanitize and validate POST data
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $playlist_name = isset($_POST['playlist_name']) ? sanitize_text_field($_POST['playlist_name']) : '';
+        if(empty($playlist_name)) {
+            echo '<div class="error"><p>Playlist name cannot be empty.</p></div>';
+            return;
+        }
         // Further validation can be added here
     }
 
@@ -64,4 +68,5 @@ function render_playlist_admin_page() {
     </div>
     <?php
 }
+
 ?>

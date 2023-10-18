@@ -1,4 +1,5 @@
 <?php
+
 function render_playlist($request) {
     // Get the post based on the ID
     $post_id = $request['id'];
@@ -10,21 +11,11 @@ function render_playlist($request) {
     }
 
     // Extract metadata and check for missing or corrupted data
-    $metadata_keys = [  'timing', 
-                        'source_url', 
-                        'length', 
-                        'play_direction', 
-                        'credits', 
-                        'description', 
-                        'thumbnail_image', 
-                        'created', 
-                        'live', 
-                        'rating', 
-                        'number_views', 
-                        'screen_ratio', 
-                        'tags', 
-                        'keywords'
-                    ];
+    $metadata_keys = [
+        'timing', 'source_url', 'length', 'play_direction', 'credits', 'description',
+        'thumbnail_image', 'created', 'live', 'rating', 'number_views', 'screen_ratio',
+        'tags', 'keywords'
+    ];
     $response = [];
     foreach ($metadata_keys as $key) {
         $value = get_post_meta($post_id, $key, true);
@@ -37,14 +28,14 @@ function render_playlist($request) {
     return new WP_REST_Response($response, 200);
 }
 
-
 // Register the API endpoint
 function register_playlist_renderer() {
-    register_rest_route('playlist/v1', '/render/(?P<id>\d+)', array(
+    register_rest_route('playlist/v1', '/render/(?P<id>\\d+)', array(
         'methods' => 'GET',
         'callback' => 'render_playlist',
     ));
 }
 
 add_action('rest_api_init', 'register_playlist_renderer');
+
 ?>

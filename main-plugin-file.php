@@ -50,20 +50,21 @@ foreach ($required_resources as $resource) {
 }
 
 // Include necessary files
-require_once(plugin_dir_path(__FILE__) . 'init.php');
 require_once(plugin_dir_path(__FILE__) . 'admin-interface.php');
+require_once(plugin_dir_path(__FILE__) . 'ajax-handlers.php');
 require_once(plugin_dir_path(__FILE__) . 'APIEndpointsRegistrar.php');
+require_once(plugin_dir_path(__FILE__) . 'debug.php');
+require_once(plugin_dir_path(__FILE__) . 'init.php');
+require_once(plugin_dir_path(__FILE__) . 'install.php');
+require_once(plugin_dir_path(__FILE__) . 'playlist-renderer.php');
 require_once(plugin_dir_path(__FILE__) . 'PlaylistCreator.php');
 require_once(plugin_dir_path(__FILE__) . 'PlaylistDeleter.php');
 require_once(plugin_dir_path(__FILE__) . 'PlaylistFetcher.php');
 require_once(plugin_dir_path(__FILE__) . 'PlaylistUpdater.php');
-require_once(plugin_dir_path(__FILE__) . 'ajax-handlers.php');
-require_once(plugin_dir_path(__FILE__) . 'tests/bootstrap.php');
 require_once(plugin_dir_path(__FILE__) . 'shortcode.php');
-require_once(plugin_dir_path(__FILE__) . 'utils.php');
-require_once(plugin_dir_path(__FILE__) . 'install.php');
-require_once(plugin_dir_path(__FILE__) . 'playlist-renderer.php');
+// require_once(plugin_dir_path(__FILE__) . 'tests/bootstrap.php');
 require_once(plugin_dir_path(__FILE__) . 'uninstall.php');
+require_once(plugin_dir_path(__FILE__) . 'utils.php');
 // Other main plugin code can go here...
 
 ?>

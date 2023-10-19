@@ -34,7 +34,9 @@ function playlist_plugin_install() {
     // Other installation tasks can go here...
 }
 
+log_me("register_activation_hook about to start");
 register_activation_hook(__FILE__, 'playlist_plugin_install');
+log_me("activation hook registered");
 
 // Runs when the plugin is deactivated
 function playlist_plugin_deactivate() {

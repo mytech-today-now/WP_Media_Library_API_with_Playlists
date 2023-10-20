@@ -10,6 +10,18 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
+// intitialize the buffered logger
+$bufferedLogger = new BufferedLogger();
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::DEBUG));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::INFO));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::WARNING));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ERROR));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::CRITICAL));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ALERT));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::EMERGENCY));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ERROR));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::NOTICE));
+
 // Define plugin version as a constant
 define('CUSTOM_PLAYLIST_CREATOR_VERSION', '1.0');
 

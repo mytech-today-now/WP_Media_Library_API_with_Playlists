@@ -12,6 +12,7 @@
 
 // Include the config file
 require_once(plugin_dir_path(__FILE__) . 'config.php');
+require_once(plugin_dir_path(__FILE__) . 'init.php');
 
 class WPMediaBufferedLogger {
     public function __construct() {
@@ -79,7 +80,6 @@ $files_to_include = [
     'admin-interface.php',
     'ajax-handlers.php',
     'APIEndpointsRegistrar.php',
-    'init.php',
     'install.php',
     'playlist-renderer.php',
     'PlaylistCreator.php',

@@ -18,6 +18,50 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+class BufferedLogger {
+
+    public function __construct() {
+        // Start buffering when WordPress initializes
+        add_action('init', [$this, 'start_buffering']);
+
+        // End buffering during the WordPress shutdown phase
+        add_action('shutdown', [$this, 'end_buffering']);
+    }
+
+    public function start_buffering() {
+        ob_start();
+    }
+
+    public function end_buffering() {
+        ob_end_flush();
+    }
+
+    public function log_me($message) {
+        if (WP_DEBUG === true) {
+            if (is_array($message) || is_object($message)) {
+                error_log(print_r($message, true));
+            } else {
+                error_log($message);
+                echo "<script>console.log('{$message}');</script>";
+            }
+        }
+    }
+}
+
+
+// intitialize the buffered logger
+$bufferedLogger = new BufferedLogger();
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::DEBUG));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::INFO));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::WARNING));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ERROR));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::CRITICAL));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ALERT));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::EMERGENCY));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ERROR));
+$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::NOTICE));
+
+
 // Plugin Activation
 function custom_playlist_activation() {
     // Code to run on plugin activation
@@ -53,7 +97,6 @@ foreach ($required_resources as $resource) {
 require_once(plugin_dir_path(__FILE__) . 'admin-interface.php');
 require_once(plugin_dir_path(__FILE__) . 'ajax-handlers.php');
 require_once(plugin_dir_path(__FILE__) . 'APIEndpointsRegistrar.php');
-require_once(plugin_dir_path(__FILE__) . 'debug.php');
 require_once(plugin_dir_path(__FILE__) . 'init.php');
 require_once(plugin_dir_path(__FILE__) . 'install.php');
 require_once(plugin_dir_path(__FILE__) . 'playlist-renderer.php');
@@ -62,23 +105,11 @@ require_once(plugin_dir_path(__FILE__) . 'PlaylistDeleter.php');
 require_once(plugin_dir_path(__FILE__) . 'PlaylistFetcher.php');
 require_once(plugin_dir_path(__FILE__) . 'PlaylistUpdater.php');
 require_once(plugin_dir_path(__FILE__) . 'shortcode.php');
-// require_once(plugin_dir_path(__FILE__) . 'tests/bootstrap.php');
 require_once(plugin_dir_path(__FILE__) . 'uninstall.php');
 require_once(plugin_dir_path(__FILE__) . 'utils.php');
+
 // Other main plugin code can go here...
 
-
-// intitialize the buffered logger
-$bufferedLogger = new BufferedLogger();
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::DEBUG));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::INFO));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::WARNING));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ERROR));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::CRITICAL));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ALERT));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::EMERGENCY));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ERROR));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::NOTICE));
-
+?>
 
 ?>

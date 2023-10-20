@@ -2,17 +2,23 @@
 
 // Enqueue scripts and styles for the admin interface
 function enqueue_playlist_admin_scripts($hook_suffix) {
+    echo "Executing function enqueue_playlist_admin_scripts - admin-interface.php - line " . __LINE__ . "\n";
+    
     // Check if we're on the playlist management page
     if ('edit.php' === $hook_suffix && isset($_GET['post_type']) && 'playlist' === $_GET['post_type']) {
         wp_enqueue_style('playlist-admin-css', plugins_url('css/admin-style.css', __FILE__));
         wp_enqueue_script('playlist-admin-js', plugins_url('js/admin-scripts.js', __FILE__), array('jquery'), null, true);
     }
+    
+    echo "Finished executing function enqueue_playlist_admin_scripts - admin-interface.php - line " . __LINE__ . "\n";
 }
 
 add_action('admin_enqueue_scripts', 'enqueue_playlist_admin_scripts');
 
 // Add submenu page for the playlist interface
 function add_playlist_menu_page() {
+    echo "Executing function add_playlist_menu_page - admin-interface.php - line " . __LINE__ . "\n";
+    
     add_submenu_page(
         'edit.php?post_type=playlist',
         __('Manage Playlists', 'your-plugin-textdomain'),
@@ -21,12 +27,15 @@ function add_playlist_menu_page() {
         'manage-playlists',
         'render_playlist_admin_page'
     );
+    
+    echo "Finished executing function add_playlist_menu_page - admin-interface.php - line " . __LINE__ . "\n";
 }
 
 add_action('admin_menu', 'add_playlist_menu_page');
 
 // Render the playlist management page
 function render_playlist_admin_page() {
+    echo "Executing function render_playlist_admin_page - admin-interface.php - line " . __LINE__ . "\n";
     
     // Nonce for security
     $nonce = wp_create_nonce('playlist_nonce');
@@ -70,6 +79,8 @@ function render_playlist_admin_page() {
         </form>
     </div>
     <?php
+    
+    echo "Finished executing function render_playlist_admin_page - admin-interface.php - line " . __LINE__ . "\n";
 }
 
 ?>

@@ -2,6 +2,8 @@
 
 // AJAX handler to fetch more media items
 function fetch_more_media_items() {
+    echo "Executing function fetch_more_media_items - ajax-handlers.php - line " . __LINE__ . "\n";
+    
     // Verify nonce for security
     if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'fetch_more_media_nonce')) {
         wp_send_json_error('Nonce verification failed.');
@@ -37,6 +39,8 @@ function fetch_more_media_items() {
 
     // Return the data as JSON
     wp_send_json_success($attachments);
+    
+    echo "Finished executing function fetch_more_media_items - ajax-handlers.php - line " . __LINE__ . "\n";
 }
 
 // Register the AJAX action

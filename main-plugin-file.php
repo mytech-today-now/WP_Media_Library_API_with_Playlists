@@ -12,7 +12,7 @@
 
 // Include the config file
 require_once(plugin_dir_path(__FILE__) . 'config.php');
-echo "config.php loaded";
+echo "config.php loaded+";
 
 /*
 class WPMediaBufferedLogger {

@@ -35,12 +35,17 @@ class WPMediaBufferedLogger {
     }
 
     public function log_me($message) {
+        $trace = debug_backtrace();
+        $file = isset($trace[0]['file']) ? $trace[0]['file'] : '';
+        $line = isset($trace[0]['line']) ? $trace[0]['line'] : '';
+        $logMessage = "[$file:$line] $message";
+
         if (WP_DEBUG === true) {
-            if (is_array($message) || is_object($message)) {
-                error_log(print_r($message, true));
+            if (is_array($logMessage) || is_object($logMessage)) {
+                error_log(print_r($logMessage, true));
             } else {
-                error_log($message);
-                echo "<script>console.log('{$message}');</script>";
+                error_log($logMessage);
+                echo "<script>console.log('{$logMessage}');</script>";
             }
         }
     }
@@ -50,12 +55,14 @@ $bufferedLogger = new WPMediaBufferedLogger();
 
 // Plugin Activation
 function custom_playlist_activation() {
+    global $bufferedLogger;
     // Code to run on plugin activation
     $bufferedLogger->log_me("Code to run on plugin activation - TBD");
 }
 
 // Plugin Deactivation
 function custom_playlist_deactivation() {
+    global $bufferedLogger;
     // Code to run on plugin deactivation
     $bufferedLogger->log_me("Code to run on plugin deactivation - TBD");
 }

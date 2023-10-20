@@ -18,22 +18,23 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class BufferedLogger {
+class WPMediaBufferedLogger {
 
     public function __construct() {
-        // Start buffering when WordPress initializes
         add_action('init', [$this, 'start_buffering']);
-
-        // End buffering during the WordPress shutdown phase
         add_action('shutdown', [$this, 'end_buffering']);
     }
 
     public function start_buffering() {
-        ob_start();
+        if (!ob_get_level()) { // Check if output buffering is already active
+            ob_start();
+        }
     }
 
     public function end_buffering() {
-        ob_end_flush();
+        if (ob_get_level()) { // Check if output buffering is active before ending it
+            ob_end_flush();
+        }
     }
 
     public function log_me($message) {
@@ -48,30 +49,16 @@ class BufferedLogger {
     }
 }
 
-
-// intitialize the buffered logger
-$bufferedLogger = new BufferedLogger();
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::DEBUG));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::INFO));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::WARNING));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ERROR));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::CRITICAL));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ALERT));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::EMERGENCY));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::ERROR));
-$bufferedLogger->pushHandler(new StreamHandler("./files/logs/mylog.log", Logger::NOTICE));
-
+$bufferedLogger = new WPMediaBufferedLogger();
 
 // Plugin Activation
 function custom_playlist_activation() {
     // Code to run on plugin activation
-    // For example, you can set default options, create database tables, etc.
 }
 
 // Plugin Deactivation
 function custom_playlist_deactivation() {
     // Code to run on plugin deactivation
-    // For example, you can clean up temporary data, remove cron jobs, etc.
 }
 
 register_activation_hook(__FILE__, 'custom_playlist_activation');
@@ -85,7 +72,7 @@ if (version_compare($wp_version, '5.0', '<')) {
 }
 
 // Check for required resources
-$required_resources = ['js/script.js', 'css/style.css']; // Placeholder for required resources
+$required_resources = ['js/script.js', 'css/style.css'];
 foreach ($required_resources as $resource) {
     if (!file_exists(plugin_dir_path(__FILE__) . $resource)) {
         deactivate_plugins(basename(__FILE__)); // Deactivate the plugin
@@ -97,6 +84,7 @@ foreach ($required_resources as $resource) {
 require_once(plugin_dir_path(__FILE__) . 'admin-interface.php');
 require_once(plugin_dir_path(__FILE__) . 'ajax-handlers.php');
 require_once(plugin_dir_path(__FILE__) . 'APIEndpointsRegistrar.php');
+require_once(plugin_dir_path(__FILE__) . 'debug.php');
 require_once(plugin_dir_path(__FILE__) . 'init.php');
 require_once(plugin_dir_path(__FILE__) . 'install.php');
 require_once(plugin_dir_path(__FILE__) . 'playlist-renderer.php');
@@ -107,9 +95,5 @@ require_once(plugin_dir_path(__FILE__) . 'PlaylistUpdater.php');
 require_once(plugin_dir_path(__FILE__) . 'shortcode.php');
 require_once(plugin_dir_path(__FILE__) . 'uninstall.php');
 require_once(plugin_dir_path(__FILE__) . 'utils.php');
-
-// Other main plugin code can go here...
-
-?>
 
 ?>

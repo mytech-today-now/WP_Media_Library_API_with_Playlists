@@ -13,8 +13,7 @@
 // Include the config file
 require_once(plugin_dir_path(__FILE__) . 'config.php');
 echo "config.php loaded";
-require_once(plugin_dir_path(__FILE__) . 'init.php');
-echo "init.php loaded";
+
 
 class WPMediaBufferedLogger {
     public function __construct() {
@@ -90,6 +89,7 @@ foreach ($required_resources as $resource) {
 
 // Include necessary files
 $files_to_include = [
+    'init.php',
     'admin-interface.php',
     'ajax-handlers.php',
     'APIEndpointsRegistrar.php',

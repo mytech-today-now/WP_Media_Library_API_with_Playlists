@@ -19,7 +19,6 @@ if (!defined('ABSPATH')) {
 }
 
 class WPMediaBufferedLogger {
-
     public function __construct() {
         add_action('init', [$this, 'start_buffering']);
         add_action('shutdown', [$this, 'end_buffering']);
@@ -81,18 +80,28 @@ foreach ($required_resources as $resource) {
 }
 
 // Include necessary files
-require_once(plugin_dir_path(__FILE__) . 'admin-interface.php');
-require_once(plugin_dir_path(__FILE__) . 'ajax-handlers.php');
-require_once(plugin_dir_path(__FILE__) . 'APIEndpointsRegistrar.php');
-require_once(plugin_dir_path(__FILE__) . 'init.php');
-require_once(plugin_dir_path(__FILE__) . 'install.php');
-require_once(plugin_dir_path(__FILE__) . 'playlist-renderer.php');
-require_once(plugin_dir_path(__FILE__) . 'PlaylistCreator.php');
-require_once(plugin_dir_path(__FILE__) . 'PlaylistDeleter.php');
-require_once(plugin_dir_path(__FILE__) . 'PlaylistFetcher.php');
-require_once(plugin_dir_path(__FILE__) . 'PlaylistUpdater.php');
-require_once(plugin_dir_path(__FILE__) . 'shortcode.php');
-require_once(plugin_dir_path(__FILE__) . 'uninstall.php');
-require_once(plugin_dir_path(__FILE__) . 'utils.php');
+$files_to_include = [
+    'admin-interface.php',
+    'ajax-handlers.php',
+    'APIEndpointsRegistrar.php',
+    'init.php',
+    'install.php',
+    'playlist-renderer.php',
+    'PlaylistCreator.php',
+    'PlaylistDeleter.php',
+    'PlaylistFetcher.php',
+    'PlaylistUpdater.php',
+    'shortcode.php',
+    'uninstall.php',
+    'utils.php'
+];
+
+foreach ($files_to_include as $file) {
+    if (file_exists(plugin_dir_path(__FILE__) . $file)) {
+        require_once(plugin_dir_path(__FILE__) . $file);
+    } else {
+        $bufferedLogger->log_me("Missing file: {$file}");
+    }
+}
 
 ?>

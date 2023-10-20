@@ -1,15 +1,11 @@
 <?php
 
-// Instantiate the logging class
-//$bufferedLogger = new WPMediaBufferedLogger();
-
-
-// $bufferedLogger->log_me("Init loaded");
-
 // Prevent direct file access
+echo "Checking for direct file access - init.php - line 5";
 if (!defined('ABSPATH')) {
-    // $bufferedLogger->log_me("Exiting because of direct file access not defined");
-    echo "Exiting because of direct file access not defined";
+    echo "Exiting because of direct file access not defined - init.php - line 7";
     exit;
 }
+echo "Checked for direct file access - init.php - line 10";
+
 ?>

@@ -11,87 +11,53 @@
  */
 
 // Include the config file
+echo "Including config.php - main-plugin-file.php - line 14";
 require_once(plugin_dir_path(__FILE__) . 'config.php');
-echo "config.php loaded+";
+echo "Included config.php - main-plugin-file.php - line 16";
 
-/*
-class WPMediaBufferedLogger {
-    public function __construct() {
-        add_action('init', [$this, 'start_buffering']);
-        add_action('shutdown', [$this, 'end_buffering']);
-    }
-
-    public function start_buffering() {
-        if (!ob_get_level()) { // Check if output buffering is already active
-            ob_start();
-        }
-    }
-
-    public function end_buffering() {
-        if (ob_get_level()) { // Check if output buffering is active before ending it
-            ob_end_flush();
-        }
-    }
-
-    public function log_me($message) {
-        $trace = debug_backtrace();
-        $file = isset($trace[0]['file']) ? $trace[0]['file'] : '';
-        $line = isset($trace[0]['line']) ? $trace[0]['line'] : '';
-        $logMessage = "[$file:$line] $message";
-
-        if (WP_DEBUG === true) {
-            if (is_array($logMessage) || is_object($logMessage)) {
-                error_log(print_r($logMessage, true));
-            } else {
-                error_log($logMessage);
-                echo "<script>console.log('{$logMessage}');</script>";
-            }
-        }
-    }
-}
-
-$bufferedLogger = new WPMediaBufferedLogger();
-*/
 // Plugin Activation
 function custom_playlist_activation() {
-    global $bufferedLogger;
-    echo "custom_playlist_activation";
+    echo "Starting custom_playlist_activation - main-plugin-file.php - line 21";
     // Code to run on plugin activation
- //   $bufferedLogger->log_me("Code to run on plugin activation - TBD");
+    echo "Completed custom_playlist_activation - main-plugin-file.php - line 24";
 }
 
 // Plugin Deactivation
 function custom_playlist_deactivation() {
-    global $bufferedLogger;
-    echo "custom_playlist_deactivation";
+    echo "Starting custom_playlist_deactivation - main-plugin-file.php - line 29";
     // Code to run on plugin deactivation
-   // $bufferedLogger->log_me("Code to run on plugin deactivation - TBD");
+    echo "Completed custom_playlist_deactivation - main-plugin-file.php - line 32";
 }
 
+echo "Registering activation and deactivation hooks - main-plugin-file.php - line 35";
 register_activation_hook(__FILE__, 'custom_playlist_activation');
 register_deactivation_hook(__FILE__, 'custom_playlist_deactivation');
+echo "Registered activation and deactivation hooks - main-plugin-file.php - line 38";
 
 // Check for WordPress version compatibility
+echo "Checking WordPress version compatibility - main-plugin-file.php - line 41";
 global $wp_version;
 if (version_compare($wp_version, '5.0', '<')) {
     deactivate_plugins(plugin_basename(__FILE__)); // Deactivate the plugin
-    //$bufferedLogger->log_me("This plugin requires WordPress version 5.0 or higher.");
     echo "This plugin requires WordPress version 5.0 or higher.";
     wp_die("This plugin requires WordPress version 5.0 or higher.");
 }
+echo "Checked WordPress version compatibility - main-plugin-file.php - line 49";
 
 // Check for required resources
+echo "Checking for required resources - main-plugin-file.php - line 52";
 $required_resources = ['js/script.js', 'css/style.css'];
 foreach ($required_resources as $resource) {
     if (!file_exists(plugin_dir_path(__FILE__) . $resource)) {
         deactivate_plugins(basename(__FILE__)); // Deactivate the plugin
-        //$bufferedLogger->log_me("Missing required resource: {$resource}.");
         echo "Missing required resource: {$resource}";
         wp_die("Missing required resource: {$resource}.");
     }
 }
+echo "Checked for required resources - main-plugin-file.php - line 62";
 
 // Include necessary files
+echo "Including necessary files - main-plugin-file.php - line 65";
 $files_to_include = [
     'init.php',
     'admin-interface.php',
@@ -110,11 +76,13 @@ $files_to_include = [
 ];
 
 foreach ($files_to_include as $file) {
+    echo "Including {$file} - main-plugin-file.php - line 82";
     if (file_exists(plugin_dir_path(__FILE__) . $file)) {
         require_once(plugin_dir_path(__FILE__) . $file);
     } else {
         echo "Missing file: {$file}";
-        //$bufferedLogger->log_me("Missing file: {$file}");
     }
+    echo "Included {$file} - main-plugin-file.php - line 88";
 }
+echo "Included necessary files - main-plugin-file.php - line 91";
 ?>

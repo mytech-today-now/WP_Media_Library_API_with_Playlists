@@ -7,6 +7,7 @@
  * @return string Sanitized string.
  */
 function sanitize_string_input($input) {
+    echo "Try to get cached results - utils.php - line " . __LINE__ . "\n";
     return sanitize_text_field($input);
 }
 
@@ -18,6 +19,7 @@ function sanitize_string_input($input) {
  */
 function process_url($url) {
     if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+        echo "Validate and sanitize URL - failed - utils.php - line " . __LINE__ . "\n";
         return false;
     }
     return esc_url_raw($url);
@@ -31,6 +33,7 @@ function process_url($url) {
  */
 function process_integer($int) {
     if (filter_var($int, FILTER_VALIDATE_INT) === false) {
+        echo "Validate and sanitize integer values - failed - utils.php - line " . __LINE__ . "\n";
         return false;
     }
     return intval($int);
@@ -43,6 +46,7 @@ function process_integer($int) {
  * @return bool Converted boolean value.
  */
 function string_to_bool($string) {
+    echo "Convert string 'true' and 'false' to boolean - utils.php - line " . __LINE__ . "\n";
     return filter_var($string, FILTER_VALIDATE_BOOLEAN);
 }
 
@@ -52,6 +56,7 @@ function string_to_bool($string) {
  * @param int $post_id The post ID to check.
  * @return bool True if valid, false otherwise.
  */
+echo "Helper function to check if a given post ID belongs to a 'playlist' post type - utils.php - line " . __LINE__ . "\n";
 function is_valid_playlist($post_id) {
     $post = get_post($post_id);
     return ($post && $post->post_type === 'playlist');
@@ -65,6 +70,7 @@ function is_valid_playlist($post_id) {
  */
 function process_email($email) {
     if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+        echo "Sanitized email or false if invalid - utils.php - line " . __LINE__ . "\n";
         return false;
     }
     return sanitize_email($email);
@@ -77,6 +83,7 @@ function process_email($email) {
  * @return string Sanitized textarea input.
  */
 function sanitize_textarea_input($input) {
+    echo "Sanitize textarea input - utils.php - line " . __LINE__ . "\n";
     return sanitize_textarea_field($input);
 }
 

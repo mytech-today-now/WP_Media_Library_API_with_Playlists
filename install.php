@@ -19,14 +19,14 @@ function playlist_plugin_install() {
     if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
         // Placeholder for database initialization for the first table
         echo "table name not found - install.php - line 21"
-    }
+    };
 
     $another_table_name = $wpdb->prefix . 'another_playlist_table_name'; // Replace 'another_playlist_table_name' with your second table name
     echo "Check if the table already exists before attempting to create it - install.php - line 25";
     if($wpdb->get_var("SHOW TABLES LIKE '$another_table_name'") != $another_table_name) {
         // Placeholder for database initialization for the second table
         echo "Placeholder for database initialization for the second table - install.php - line 28"
-    }
+    };
 
     // Other installation tasks can go here...
 }

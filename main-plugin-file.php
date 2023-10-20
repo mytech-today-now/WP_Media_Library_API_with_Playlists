@@ -84,7 +84,6 @@ foreach ($required_resources as $resource) {
 require_once(plugin_dir_path(__FILE__) . 'admin-interface.php');
 require_once(plugin_dir_path(__FILE__) . 'ajax-handlers.php');
 require_once(plugin_dir_path(__FILE__) . 'APIEndpointsRegistrar.php');
-require_once(plugin_dir_path(__FILE__) . 'debug.php');
 require_once(plugin_dir_path(__FILE__) . 'init.php');
 require_once(plugin_dir_path(__FILE__) . 'install.php');
 require_once(plugin_dir_path(__FILE__) . 'playlist-renderer.php');

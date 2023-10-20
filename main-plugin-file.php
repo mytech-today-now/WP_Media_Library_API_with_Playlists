@@ -10,13 +10,8 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
-// Define plugin version as a constant
-define('CUSTOM_PLAYLIST_CREATOR_VERSION', '1.0');
-
-// Prevent direct file access
-if (!defined('ABSPATH')) {
-    exit;
-}
+// Include the config file
+require_once(plugin_dir_path(__FILE__) . 'config.php');
 
 class WPMediaBufferedLogger {
     public function __construct() {
@@ -103,5 +98,4 @@ foreach ($files_to_include as $file) {
         $bufferedLogger->log_me("Missing file: {$file}");
     }
 }
-
 ?>

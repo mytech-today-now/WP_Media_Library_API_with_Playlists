@@ -24,6 +24,7 @@ function add_playlist_menu_page() {
 }
 
 add_action('admin_menu', 'add_playlist_menu_page');
+
 // Render the playlist management page
 function render_playlist_admin_page() {
     

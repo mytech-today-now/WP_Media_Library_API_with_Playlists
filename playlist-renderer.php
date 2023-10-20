@@ -35,7 +35,7 @@ function render_playlist($request) {
 
 // Register the API endpoint
 function register_playlist_renderer() {
-    register_rest_route('playlist/v1', '/render/(?P<id>\\d+)', array(
+    register_rest_route('playlist/v1', '/render/(?P<id>\d+)', array(
         'methods' => 'GET',
         'callback' => 'render_playlist',
     ));

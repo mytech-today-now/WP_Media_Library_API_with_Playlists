@@ -12,12 +12,12 @@ class APIEndpointsRegistrar {
             'callback' => array('PlaylistCreator', 'create_playlist')
         ));
 
-        register_rest_route('playlist/v1', '/update/(?P<id>\\d+)', array(
+        register_rest_route('playlist/v1', '/update/(?P<id>\d+)', array(
             'methods' => 'POST',
             'callback' => array('PlaylistUpdater', 'update_playlist')
         ));
 
-        register_rest_route('playlist/v1', '/delete/(?P<id>\\d+)', array(
+        register_rest_route('playlist/v1', '/delete/(?P<id>\d+)', array(
             'methods' => 'DELETE',
             'callback' => array('PlaylistDeleter', 'delete_playlist')
         ));

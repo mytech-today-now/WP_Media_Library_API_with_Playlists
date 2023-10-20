@@ -1,44 +1,49 @@
-
 <?php
-// Registering the Custom Post Type
-function register_playlist_post_type() {
-    $labels = array(
-        'name'               => _x( 'Playlists', 'post type general name', 'your-plugin-textdomain' ),
-        'singular_name'      => _x( 'Playlist', 'post type singular name', 'your-plugin-textdomain' ),
-        'menu_name'          => _x( 'Playlists', 'admin menu', 'your-plugin-textdomain' ),
-        'name_admin_bar'     => _x( 'Playlist', 'add new on admin bar', 'your-plugin-textdomain' ),
-        'add_new'            => _x( 'Add New', 'playlist', 'your-plugin-textdomain' ),
-        'add_new_item'       => __( 'Add New Playlist', 'your-plugin-textdomain' ),
-        'new_item'           => __( 'New Playlist', 'your-plugin-textdomain' ),
-        'edit_item'          => __( 'Edit Playlist', 'your-plugin-textdomain' ),
-        'view_item'          => __( 'View Playlist', 'your-plugin-textdomain' ),
-        'all_items'          => __( 'All Playlists', 'your-plugin-textdomain' ),
-        'search_items'       => __( 'Search Playlists', 'your-plugin-textdomain' ),
-        'parent_item_colon'  => __( 'Parent Playlists:', 'your-plugin-textdomain' ),
-        'not_found'          => __( 'No playlists found.', 'your-plugin-textdomain' ),
-        'not_found_in_trash' => __( 'No playlists found in Trash.', 'your-plugin-textdomain' )
-    );
-
-    $args = array(
-        'labels'             => $labels,
-        'description'        => __( 'A custom post type for playlists', 'your-plugin-textdomain' ),
-        'public'             => true,
-        'publicly_queryable' => true,
-        'show_ui'            => true,
-        'show_in_menu'       => true,
-        'query_var'          => true,
-        'rewrite'            => array( 'slug' => 'playlist' ),
-        'capability_type'    => 'post',
-        'has_archive'        => true,
-        'hierarchical'       => false,
-        'menu_position'      => null,
-        'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
-    );
-
-    register_post_type( 'playlist', $args );
+// Prevent direct file access
+if (!defined('ABSPATH')) {
+    exit;
 }
 
-add_action( 'init', 'register_playlist_post_type' );
+// Instantiate the logging class
+$bufferedLogger = new WPMediaBufferedLogger();
 
-// You can add taxonomies here if needed in the future.
+// Check for WordPress version compatibility
+global $wp_version;
+if (version_compare($wp_version, '5.0', '<')) {
+    deactivate_plugins(basename(__FILE__)); // Deactivate the plugin
+    wp_die("This plugin requires WordPress version 5.0 or higher.");
+}
+
+// Check for required resources
+$required_resources = ['js/script.js', 'css/style.css'];
+foreach ($required_resources as $resource) {
+    if (!file_exists(plugin_dir_path(__FILE__) . $resource)) {
+        deactivate_plugins(basename(__FILE__)); // Deactivate the plugin
+        wp_die("Missing required resource: {$resource}.");
+    }
+}
+
+// Include necessary files
+$files_to_include = [
+    'admin-interface.php',
+    'ajax-handlers.php',
+    'APIEndpointsRegistrar.php',
+    'install.php',
+    'playlist-renderer.php',
+    'PlaylistCreator.php',
+    'PlaylistDeleter.php',
+    'PlaylistFetcher.php',
+    'PlaylistUpdater.php',
+    'shortcode.php',
+    'uninstall.php',
+    'utils.php'
+];
+
+foreach ($files_to_include as $file) {
+    if (file_exists(plugin_dir_path(__FILE__) . $file)) {
+        require_once(plugin_dir_path(__FILE__) . $file);
+    } else {
+        $bufferedLogger->log_me("Missing file: {$file}");
+    }
+}
 ?>

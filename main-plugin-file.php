@@ -82,6 +82,7 @@ $files_to_include = [
     'APIEndpointsRegistrar.php',
     'install.php',
     'playlist-renderer.php',
+    'playlist-template.php',
     'PlaylistCreator.php',
     'PlaylistDeleter.php',
     'PlaylistFetcher.php',

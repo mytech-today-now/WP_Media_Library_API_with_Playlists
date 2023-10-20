@@ -1,16 +1,19 @@
 <?php
-// Prevent direct file access
-if (!defined('ABSPATH')) {
-    exit;
-}
 
 // Instantiate the logging class
 $bufferedLogger = new WPMediaBufferedLogger();
+
+// Prevent direct file access
+if (!defined('ABSPATH')) {
+    $bufferedLogger->log_me("Exiting because of direct file access not defined");
+    exit;
+}
 
 // Check for WordPress version compatibility
 global $wp_version;
 if (version_compare($wp_version, '5.0', '<')) {
     deactivate_plugins(basename(__FILE__)); // Deactivate the plugin
+    $bufferedLogger->log_me("This plugin requires WordPress version 5.0 or higher.");
     wp_die("This plugin requires WordPress version 5.0 or higher.");
 }
 
@@ -19,6 +22,7 @@ $required_resources = ['js/script.js', 'css/style.css'];
 foreach ($required_resources as $resource) {
     if (!file_exists(plugin_dir_path(__FILE__) . $resource)) {
         deactivate_plugins(basename(__FILE__)); // Deactivate the plugin
+        $bufferedLogger->log_me("Missing required resource: {$resource}.");
         wp_die("Missing required resource: {$resource}.");
     }
 }
